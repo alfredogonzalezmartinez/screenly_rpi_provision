@@ -1,0 +1,8 @@
+#Define network parameters
+NETMASK='255.255.255.0'
+GATEWAY='192.168.1.1'
+DNS='8.8.8.8 8.8.4.4'
+
+#Define Wi-Fi credentials
+SSID='"MyWifi"'
+PSK='"MyPassword"'
