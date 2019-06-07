@@ -7,7 +7,7 @@
 #   <ip>                    <----- IP adress Example: 10.100.64.27
 #   <urls_file>             <----- complete path. Example: ~\URLs.txt
 
-#initialize the timer
+#Initialize the timer
 START=$(date +%s)
 
 #Check the number of parameters
@@ -50,7 +50,7 @@ fi
 
 #Define the partitions of the device
 DEV=`basename $1`
-DEVTYPE=echo ${DEV:0:2}
+DEVTYPE=`echo ${DEV:0:2}`
 if [ $DEVTYPE=="sd" ]; then
   DEVICE=$1'1'
   DEVICE2=$1'2'
@@ -93,11 +93,13 @@ if [ $# -eq 5 ]; then
 	echo
 fi
 
+#Delete the partition table
+sudo sfdisk --delete /dev/sda >/dev/null 2>/dev/null
 #Copy the image to the device
 gzip -d -c $2 | dd of=$1 status=progress
 
-#Delay 2 second the command 'mount' for detect the partitions
-sleep 2
+#Delay 5 second the command 'mount' for detect the partitions
+sleep 5
 
 #Enable ssh
 mount $DEVICE /tmp
